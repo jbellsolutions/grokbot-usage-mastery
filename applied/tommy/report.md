@@ -1,19 +1,19 @@
-# Usage-mastery report: tmec
+# Usage-mastery report: tmec-grokbot
 
 - Kit: grokbot-usage-mastery v1.0.0
-- Target: `<tmec-grokbot clone>`
+- Target: `/Users/home/AI OS Market Share /AIOS/Client Builds/Tommy/tmec-grokbot`
 - Layout: multi-bot-pack
 - Mode: APPLY
 - Edition: client
-- When: 2026-11-12T13:24:42
+- When: 2026-11-12T13:43:38
 
 ## Plan and result
 
 | Step | What | Status | Detail |
 |---|---|---|---|
-| rules | Usage rules in every bot's memory | applied | write policies/USAGE.md; START-HERE: Step 6 setup message, Step 2 |
-| skill | usage-saver skill and scripts | applied | add usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
-| handoff | Install, ledger and weekly audit steps in the handoff | applied | add usage section to START-HERE.md |
+| rules | Usage rules in every bot's memory | present | policies/USAGE.md and START-HERE lines present (this version) |
+| skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
+| handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in START-HERE.md (this version) |
 | routines | Routine frequency audit (report only) | present | 18 schedules, about 55 runs a week; none more often than every 3 hours |
 | skills-count | Skill count check (report only) | present | 28 skills (under 90) |
 | prompt-weight | Instructions weight (report only) | present | about 318 words of standing instructions memory holds (largest: 06-crm-reactivation 318, 07-content-studio 295, 03-dream-100 293); every turn and run re-reads them |
@@ -45,9 +45,9 @@
 - skill: PASS
 - handoff: PASS
 
-Backup of every touched file: `<backup>/tmec-20261112-132442`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/tmec-grokbot-20261112-134338`
 
-Touched: `policies/USAGE.md`, `START-HERE.md`, `usage/`, `START-HERE.md`
+Touched: `usage/`
 
 ## Needs the owner's yes (not applied)
 

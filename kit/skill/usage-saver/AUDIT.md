@@ -9,7 +9,7 @@ Runs once a week inside an existing run (the lead's Monday evening report). It c
    - **SLOW**: give it a slower cron, or limit it to working hours in the bot's time zone.
    - **EVENT**: it should start on a webhook or a file instead of a clock.
    - **CHANGE**: same job, cheaper trigger or a smaller read.
-   - **RETIRE**: nothing useful in 7 days; propose pausing it, never deleting.
+   - **RETIRE**: nothing useful all of last week; propose pausing it, never deleting.
 
    Anything more often than every 3 hours that mostly ended `[SILENT]` defaults to SLOW. Flag two routines of one bot that start under 5 minutes apart.
 4. **Instructions weight.** Count the words in the master prompt, each role section and the saved memory. Every turn and every run re-reads them. Flag duplicated rules, stale facts and anything a file could hold instead ("see context/x.md").

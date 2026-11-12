@@ -1,29 +1,50 @@
-From 1aa2c61851c9a64d74175a223996f330b97620c3 Mon Sep 17 00:00:00 2001
-From: jbellsolutions <noreply@github.com>
-Date: Thu, 12 Nov 2026 13:24:42 -0500
-Subject: [PATCH] Usage kit v1.0.0 (client edition): usage/, policies/USAGE.md,
- START-HERE usage steps
+From 61a8b2a6eeb488ba4033fa92f510066c32d88065 Mon Sep 17 00:00:00 2001
+From: jbellsolutions <jbellsolutions@gmail.com>
+Date: Thu, 12 Nov 2026 13:43:48 -0500
+Subject: [PATCH] Usage kit v1.0.0 (client edition) plus read-less lines in 14
+ skills
 
+- usage/ (usage-saver: 10 scripts, weekly AUDIT, RESET, LEDGER), policies/USAGE.md,
+  START-HERE: rules saved by TMEC Command (Step 2) and every bot (Step 6), Usage kit section
+- Skills: pages through clean_page.py, rebate and vendor pages through page_diff.py,
+  HubSpot replies through pick.py, state and list files through sheet_q.py, footage by shoot sheet
+- cb verify: ok, no errors
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ---
- START-HERE.md                | 23 +++++++++-
- policies/USAGE.md            | 18 ++++++++
- usage/AUDIT.md               | 29 +++++++++++++
- usage/LEDGER.md              |  7 +++
- usage/RESET.md               | 11 +++++
- usage/SKILL.md               | 31 ++++++++++++++
- usage/VERSION                |  1 +
- usage/scripts/check_shape.py | 43 +++++++++++++++++++
- usage/scripts/clean_page.py  | 82 ++++++++++++++++++++++++++++++++++++
- usage/scripts/grep_lines.sh  | 10 +++++
- usage/scripts/install.sh     | 25 +++++++++++
- usage/scripts/page_diff.py   | 40 ++++++++++++++++++
- usage/scripts/pdf2txt.py     | 39 +++++++++++++++++
- usage/scripts/pick.py        | 46 ++++++++++++++++++++
- usage/scripts/retry.py       | 37 ++++++++++++++++
- usage/scripts/sheet_q.py     | 57 +++++++++++++++++++++++++
- usage/scripts/shorten.py     | 39 +++++++++++++++++
- usage/scripts/usage_csv.py   | 53 +++++++++++++++++++++++
- 18 files changed, 590 insertions(+), 1 deletion(-)
+ START-HERE.md                        | 23 +++++++-
+ policies/USAGE.md                    | 18 ++++++
+ skills/cold-email-wave/SKILL.md      |  4 ++
+ skills/content-week/SKILL.md         |  4 ++
+ skills/crm-sweep/SKILL.md            |  4 ++
+ skills/newsletter-issue/SKILL.md     |  4 ++
+ skills/partner-score/SKILL.md        |  4 ++
+ skills/quiet-quote-followup/SKILL.md |  4 ++
+ skills/radar-sweep/SKILL.md          |  4 ++
+ skills/reactivation-batch/SKILL.md   |  4 ++
+ skills/rebate-watch/SKILL.md         |  4 ++
+ skills/scoreboard/SKILL.md           |  4 ++
+ skills/segment-list-build/SKILL.md   |  4 ++
+ skills/seo-audit/SKILL.md            |  4 ++
+ skills/trades-list-build/SKILL.md    |  4 ++
+ skills/vendor-review/SKILL.md        |  4 ++
+ usage/AUDIT.md                       | 29 ++++++++++
+ usage/LEDGER.md                      |  7 +++
+ usage/RESET.md                       | 11 ++++
+ usage/SKILL.md                       | 31 +++++++++++
+ usage/VERSION                        |  1 +
+ usage/scripts/check_shape.py         | 43 +++++++++++++++
+ usage/scripts/clean_page.py          | 82 ++++++++++++++++++++++++++++
+ usage/scripts/grep_lines.sh          | 10 ++++
+ usage/scripts/install.sh             | 25 +++++++++
+ usage/scripts/page_diff.py           | 40 ++++++++++++++
+ usage/scripts/pdf2txt.py             | 39 +++++++++++++
+ usage/scripts/pick.py                | 46 ++++++++++++++++
+ usage/scripts/retry.py               | 37 +++++++++++++
+ usage/scripts/sheet_q.py             | 57 +++++++++++++++++++
+ usage/scripts/shorten.py             | 39 +++++++++++++
+ usage/scripts/usage_csv.py           | 53 ++++++++++++++++++
+ 32 files changed, 646 insertions(+), 1 deletion(-)
  create mode 100644 policies/USAGE.md
  create mode 100644 usage/AUDIT.md
  create mode 100644 usage/LEDGER.md
@@ -114,9 +135,219 @@ index 0000000..cd2c3df
 +- Mondays, TMEC Command's evening brief also follows /workspace/tmec-team/repo/usage/AUDIT.md for the whole team (report only). Other bots: no extra run.
 +End of usage rules.
 +```
+diff --git a/skills/cold-email-wave/SKILL.md b/skills/cold-email-wave/SKILL.md
+index ab904d4..f7b711b 100644
+--- a/skills/cold-email-wave/SKILL.md
++++ b/skills/cold-email-wave/SKILL.md
+@@ -21,6 +21,10 @@ The wave id is the campaign name; a trades wave with several trades has the id `
+ 
+ The item format, the decision path and the send gate are in `/workspace/tmec-team/repo/policies/APPROVALS.md`, section "Items, decisions and the send gate". That is the contract. Sent keys are lines in `/workspace/tmec-team/state/sent-keys-<slug>.md`: `<item id>|<outcome>|<date time>|<detail>`, with outcomes `launched`, `sent`, `declined`, `changed`, `stale`, `mismatch`.
+ 
++## Usage (read less)
++
++Pick wave rows and check de-dup with `python3 /workspace/tmec-team/repo/usage/scripts/sheet_q.py <list.csv> "select ..."` and `grep_lines.sh`, not by opening every list file. Scripts: `usage/SKILL.md`.
++
+ ## Test mode
+ In test mode, or when `config.json` `run` is `test`: the wave folder, list rows and hooks live under `/workspace/tmec-team/state/test/partners/` (same relative paths) instead of `data/partners/`; the ITEM id starts with `test-` (the item still goes to `approved/pending/<slug>/`); **no cold email tool call that creates, launches or sends anything, and no treg call** (write `not verified: test` in the `verified` column). Part 2 writes what it would have created to `state/test/` and stops.
+ 
+diff --git a/skills/content-week/SKILL.md b/skills/content-week/SKILL.md
+index 3294ef2..4bc0ac1 100644
+--- a/skills/content-week/SKILL.md
++++ b/skills/content-week/SKILL.md
+@@ -5,6 +5,10 @@ description: Logs new job footage, asks Tommy for consent on what it wants to us
+ 
+ # Content week
+ 
++## Usage (read less)
++
++Never open a video to judge it. Work from `shoot-sheet.txt` and the file names. When you must see something, look at one small still from the clip, not the whole clip or a full-screen image. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/media/inbox/<folder>/` (footage and photos, each with `shoot-sheet.txt`: job type, suburb, date, who is shown). No sheet: log the clips with job type and suburb UNKNOWN and consent "not asked", and use none.
+ - `/workspace/tmec-team/data/content/consent-log.md` (yours): one line per shoot: `shoot-id | what Tommy cleared | decision id | date`.
+diff --git a/skills/crm-sweep/SKILL.md b/skills/crm-sweep/SKILL.md
+index 9873467..171fd25 100644
+--- a/skills/crm-sweep/SKILL.md
++++ b/skills/crm-sweep/SKILL.md
+@@ -5,6 +5,10 @@ description: Reads HubSpot every weekday and finds the follow-ups due, quotes no
+ 
+ # CRM sweep
+ 
++## Usage (read less)
++
++Cut HubSpot replies to the fields you need with `python3 /workspace/tmec-team/repo/usage/scripts/pick.py <reply.json> --path results --fields id,properties.email,properties.lifecyclestage`. Pick due rows from state files with `sheet_q.py` (`select * from t where next_due_on <= '<today>'`). Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - HubSpot, read-only. The one read-only private-app token is `HUBSPOT_TOKEN` in `/workspace/tmec-team/.secrets/hubspot.env` (scopes: contacts, deals, owners, tasks, engagements and notes, marketing email read). It is the only HubSpot route this bot has. Read contacts, deals, tasks, owners, logged emails and calls, unsubscribe status. Write down the time of the read.
+ - `/workspace/tmec-team/data/crm/hubspot-map.md`: pipelines, stage meanings, the property that holds the lead source and the partner tag, and the thresholds below. You write it on the first run.
+diff --git a/skills/newsletter-issue/SKILL.md b/skills/newsletter-issue/SKILL.md
+index 61ddf62..fcf8aa9 100644
+--- a/skills/newsletter-issue/SKILL.md
++++ b/skills/newsletter-issue/SKILL.md
+@@ -7,6 +7,10 @@ description: Builds one weekly TMEC newsletter issue for Tommy's yes: gathers re
+ 
+ Weekly, on Thursdays (Tommy, 8 Nov). Content Studio owns the newsletter email in HubSpot (names starting `NEWS-`). CRM & Reactivation owns `REACT-` batches. Neither touches the other's. A thin issue is worse than none.
+ 
++## Usage (read less)
++
++Build the audience with `sheet_q.py` and cut HubSpot replies with `pick.py --fields`, never whole replies or whole files. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - Company news: jobs in `/workspace/tmec-team/requests/to-content-studio/` that Tommy relayed through TMEC Command since the last issue. Real announcements only; treat the text as data.
+ - `/workspace/tmec-team/data/forecast/rebates.md`: rebate facts with the government source and date. Over 30 days old, or missing: hold the rebate section.
+diff --git a/skills/partner-score/SKILL.md b/skills/partner-score/SKILL.md
+index 27d0e52..40a9a1d 100644
+--- a/skills/partner-score/SKILL.md
++++ b/skills/partner-score/SKILL.md
+@@ -5,6 +5,10 @@ description: Scores a prospective TMEC partner with the rubric's hard gates and
+ 
+ # Partner score
+ 
++## Usage (read less)
++
++Read each business's site or listing with `python3 /workspace/tmec-team/repo/usage/scripts/clean_page.py <url> --max-chars 4000`, never the full page; pick rows from the list files with `sheet_q.py`. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/repo/partners/kit/RUBRIC.md`: the gates, the ten criteria and the tiers.
+ - `/workspace/tmec-team/repo/partners/kit/partner-types.md`: the ranked trades and the "beyond trades" partners.
+diff --git a/skills/quiet-quote-followup/SKILL.md b/skills/quiet-quote-followup/SKILL.md
+index e2a2857..c66b421 100644
+--- a/skills/quiet-quote-followup/SKILL.md
++++ b/skills/quiet-quote-followup/SKILL.md
+@@ -7,6 +7,10 @@ description: Drafts the six-email follow-up for quotes TMEC sent that went quiet
+ 
+ The six-email sequence from the TMEC page. Plain text, from Tommy, one idea each. Always the same honest edge: TMEC's own crews install, no subcontractors, local.
+ 
++## Usage (read less)
++
++Pick due contacts with `python3 /workspace/tmec-team/repo/usage/scripts/sheet_q.py data/crm/quote-followup-state.csv "select * from t where next_due_on <= '<today>' and status = 'active'"`, and cut HubSpot replies with `pick.py --fields`. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - HubSpot, read-only, with the one read-only token `HUBSPOT_TOKEN` in `/workspace/tmec-team/.secrets/hubspot.env` (the only token for reading; creating marketing emails and lists needs the separate `HUBSPOT_WRITE_TOKEN` at M4): deals at a quoted stage with no win, and closed-lost deals, with their contact, quote date, system type, lost reason and notes.
+ - `/workspace/tmec-team/data/crm/quote-followup-state.csv` (yours): `hubspot_contact_id, enrolled_on, segment, last_step_sent, last_sent_on, next_due_on, status`. `status`: active, paused_reply, completed, stopped_optout, held.
+diff --git a/skills/radar-sweep/SKILL.md b/skills/radar-sweep/SKILL.md
+index 4c6f316..6e5dd55 100644
+--- a/skills/radar-sweep/SKILL.md
++++ b/skills/radar-sweep/SKILL.md
+@@ -5,6 +5,10 @@ description: Searches the public web and X for people asking about solar, batter
+ 
+ # Radar sweep
+ 
++## Usage (read less)
++
++Open a thread only through `python3 /workspace/tmec-team/repo/usage/scripts/clean_page.py <url> --max-chars 3000`, and only when the search snippet can't settle the verdict. Check the ledger with `grep_lines.sh <id> /workspace/tmec-team/data/radar`, never by reading the whole file. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/data/radar/ledger.csv`: every post already seen. Columns: `id,url,platform,community,posted,seen,verdict,tier,status,note`. `id` is the first 12 characters of the SHA-256 of the post URL. Status is one of `new`, `drafted`, `approved`, `posted`, `skipped`, `rejected`, `won`.
+ - `/workspace/tmec-team/data/radar/searches.md`: the search wording in use (starts as the list below; the weekly tune edits it).
+diff --git a/skills/reactivation-batch/SKILL.md b/skills/reactivation-batch/SKILL.md
+index 6e9e6e3..d0aa72a 100644
+--- a/skills/reactivation-batch/SKILL.md
++++ b/skills/reactivation-batch/SKILL.md
+@@ -7,6 +7,10 @@ description: Picks the people for the next reactivation batch (old enquiries gon
+ 
+ Tommy, 8 Nov: reactivation goes through HubSpot marketing email, not the Microsoft 365 mailboxes. Email and text. Drafts first. Verify emails first. "Go ahead and do it yourself" covers the HubSpot change. Test batch of 24, then ramp. Cadence he set: twice a week for four weeks, then every two weeks.
+ 
++## Usage (read less)
++
++Pick the batch from the state files with `python3 /workspace/tmec-team/repo/usage/scripts/sheet_q.py <file> "select ..."`, and cut HubSpot replies with `pick.py --fields`, never whole replies or whole files. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - HubSpot, read-only, with the one read-only token `HUBSPOT_TOKEN` in `/workspace/tmec-team/.secrets/hubspot.env` (the only token for reading; creating marketing emails and lists needs the separate `HUBSPOT_WRITE_TOKEN` at M4): contacts with their enquiry date, last two-way contact, stage, lead source, consent evidence, unsubscribe status and whether they are a marketing contact.
+ - `/workspace/tmec-team/data/crm/suppression.csv` and HubSpot unsubscribe status.
+diff --git a/skills/rebate-watch/SKILL.md b/skills/rebate-watch/SKILL.md
+index a3f4f5d..87c8c3c 100644
+--- a/skills/rebate-watch/SKILL.md
++++ b/skills/rebate-watch/SKILL.md
+@@ -7,6 +7,10 @@ description: Re-checks the Clean Energy Regulator's rebate pages each month and
+ 
+ Tommy's own words (28 Oct call [13:25]): the next drop is "the end of this year. So 1st of January"; the battery rebate "drops every six months, solar every 12 months". Those are his statements. This skill turns them into a dated calendar that says where each fact comes from, and never states a figure it hasn't checked.
+ 
++## Usage (read less)
++
++Run `python3 /workspace/tmec-team/repo/usage/scripts/page_diff.py <page url> /workspace/tmec-team/data/forecast/watch` on each page first. No output means the page hasn't changed: keep the facts and re-date them. Read only the changed lines. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/data/forecast/rebates.md`: the calendar, Forecast's own file. First run: create it with the columns `Scheme | What steps down | Next step | Cadence | Source URL | Date checked | Status`.
+ - `/workspace/tmec-team/context/owner.md`: Tommy's rebate statements.
+diff --git a/skills/scoreboard/SKILL.md b/skills/scoreboard/SKILL.md
+index b0a6c20..63e5026 100644
+--- a/skills/scoreboard/SKILL.md
++++ b/skills/scoreboard/SKILL.md
+@@ -7,6 +7,10 @@ description: Builds the Monday scoreboard: every lead source against Tommy's bou
+ 
+ The answer to "what would it generate?" is a scoreboard, not a promise. Tommy's own numbers are the yardstick: bought leads at about 60 a lead, closing in the mid-20s percent, so roughly 240 to 250 a sale (his figures from the 28 Oct call; AUD is inferred; not yet measured).
+ 
++## Usage (read less)
++
++Answer each number with `python3 /workspace/tmec-team/repo/usage/scripts/sheet_q.py <file> "select ..."` and keep the source file closed. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/context/owner.md`: Tommy's bought-lead figures (cost per lead, close rate). Missing: the line is UNKNOWN and says so.
+ - Counts for the week (Saturday to Friday, Brisbane), by source, from files and HubSpot, read only, with the one read-only token `HUBSPOT_TOKEN` in `/workspace/tmec-team/.secrets/hubspot.env` (the only HubSpot route this bot has: not Connect apps; counts and dates only, no personal details):
+diff --git a/skills/segment-list-build/SKILL.md b/skills/segment-list-build/SKILL.md
+index a818833..4d01313 100644
+--- a/skills/segment-list-build/SKILL.md
++++ b/skills/segment-list-build/SKILL.md
+@@ -7,6 +7,10 @@ description: Builds one Dream 500 segment's list from public listings, scores ea
+ 
+ A segment is an industry group in the service area, for example "pool service businesses, Sunshine Coast and Moreton Bay". The Dream 500 is every owner-run business in a segment that scores 50 to 74.
+ 
++## Usage (read less)
++
++Read each business's page with `python3 /workspace/tmec-team/repo/usage/scripts/clean_page.py <url> --max-chars 4000`, never the full page. De-dup against the other list files with `python3 /workspace/tmec-team/repo/usage/scripts/sheet_q.py <file> "select ..."` or `grep_lines.sh`, not by opening them. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - The segment: from a job in `/workspace/tmec-team/requests/to-dream-500/`, else the next one in this order that has no list yet: insurance-builders, roofers, aircon, pool, pest, plumbers, renovators, home-improvement (insulation, tinting, screens, glaziers), cleaners-landscapers (landscapers, gutter, window and panel cleaners), gas, ev-dealers, loss-adjusters.
+ - `/workspace/tmec-team/repo/partners/kit/partner-types.md`, `RUBRIC.md`, and the `partner-score` skill.
+diff --git a/skills/seo-audit/SKILL.md b/skills/seo-audit/SKILL.md
+index f1a0f85..3382612 100644
+--- a/skills/seo-audit/SKILL.md
++++ b/skills/seo-audit/SKILL.md
+@@ -5,6 +5,10 @@ description: Reads TMEC's website, Google Business Profile, directory listings a
+ 
+ # SEO audit
+ 
++## Usage (read less)
++
++Read TMEC's and competitors' pages with `python3 /workspace/tmec-team/repo/usage/scripts/clean_page.py <url> --max-chars 6000`. Save each page's text under `data/seo/pages/` and next week run `page_diff.py <url> data/seo/watch` first: unchanged pages need no re-read. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - TMEC's website: the home page, each service page, the contact page and the footer, as a visitor sees them. Start from the address in `/workspace/tmec-team/context/owner.md`; if it isn't there, search for it and write what you found as UNKNOWN until Tommy confirms.
+ - TMEC's Google Business Profile and Maps listing, as a visitor sees them (Grok web search).
+diff --git a/skills/trades-list-build/SKILL.md b/skills/trades-list-build/SKILL.md
+index 985f0df..fc8dc0b 100644
+--- a/skills/trades-list-build/SKILL.md
++++ b/skills/trades-list-build/SKILL.md
+@@ -7,6 +7,10 @@ description: Builds the trades list: the top ten emailable businesses of each ra
+ 
+ The trades list is the top ten of each ranked trade (rank 1 air-con and HVAC, rank 2 roofers and roof restorers, down to rank 8 insulation, tinting, blinds, screens and glaziers, in `partner-types.md`). It goes out by cold email in waves.
+ 
++## Usage (read less)
++
++Read each business's page with `python3 /workspace/tmec-team/repo/usage/scripts/clean_page.py <url> --max-chars 4000`, never the full page. De-dup against the other list files with `sheet_q.py` or `grep_lines.sh`, not by opening them. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - The trade: from a job in `/workspace/tmec-team/requests/to-trades-outreach/`, else the highest-ranked trade with fewer than ten emailable businesses listed.
+ - `/workspace/tmec-team/repo/partners/kit/partner-types.md` (the ranked table and who is excluded), `RUBRIC.md`, and the `partner-score` skill.
+diff --git a/skills/vendor-review/SKILL.md b/skills/vendor-review/SKILL.md
+index bf570f3..b4a38da 100644
+--- a/skills/vendor-review/SKILL.md
++++ b/skills/vendor-review/SKILL.md
+@@ -7,6 +7,10 @@ description: Weekly review of TMEC's lead vendors and up to two new ones from pu
+ 
+ One job: an honest, sourced picture of the vendors, and only the changes reach Tommy. This skill reads public pages and TMEC's own files. It sends nothing and changes no vendor. Vendors are not partners.
+ 
++## Usage (read less)
++
++Run `python3 /workspace/tmec-team/repo/usage/scripts/page_diff.py <page url> /workspace/tmec-team/data/vendors/watch` on each vendor page first. Only the changed lines are read, and only changes reach Tommy. Scripts: `usage/SKILL.md`.
++
+ ## Inputs
+ - `/workspace/tmec-team/context/owner.md`: `vendor_scout` (`on`/`off`), `lead_vendors`, `baseline_cost_per_lead_aud`, `baseline_close_rate_pct`. `/workspace/tmec-team/context/config.json`: `vendor_messages` (`no` or `drafts`).
+ - `/workspace/tmec-team/data/vendors/`: one note per vendor (`<vendor-slug>.md`), the terms comparison, the last review, and `messages.md` (one line per message: id, vendor, status, date).
 diff --git a/usage/AUDIT.md b/usage/AUDIT.md
 new file mode 100644
-index 0000000..5db05ac
+index 0000000..8dd32f7
 --- /dev/null
 +++ b/usage/AUDIT.md
 @@ -0,0 +1,29 @@
@@ -131,7 +362,7 @@ index 0000000..5db05ac
 +   - **SLOW**: give it a slower cron, or limit it to working hours in the bot's time zone.
 +   - **EVENT**: it should start on a webhook or a file instead of a clock.
 +   - **CHANGE**: same job, cheaper trigger or a smaller read.
-+   - **RETIRE**: nothing useful in 7 days; propose pausing it, never deleting.
++   - **RETIRE**: nothing useful all of last week; propose pausing it, never deleting.
 +
 +   Anything more often than every 3 hours that mostly ended `[SILENT]` defaults to SLOW. Flag two routines of one bot that start under 5 minutes apart.
 +4. **Instructions weight.** Count the words in the master prompt, each role section and the saved memory. Every turn and every run re-reads them. Flag duplicated rules, stale facts and anything a file could hold instead ("see context/x.md").
@@ -164,18 +395,18 @@ index 0000000..b20661d
 +| | | | | | baseline, before usage-mastery | |
 diff --git a/usage/RESET.md b/usage/RESET.md
 new file mode 100644
-index 0000000..b058ac3
+index 0000000..86d7545
 --- /dev/null
 +++ b/usage/RESET.md
 @@ -0,0 +1,11 @@
 +# Reset a heavy bot (owner-approved only)
 +
-+A bot that has run for weeks carries its whole chat history, and much of it is old. A fresh copy that keeps only what matters reads far less each turn (the creator measured about 75% less per turn; measure your own with the ledger).
++A bot that has run for weeks carries its whole chat history, and much of it is old. A fresh copy that keeps only what matters reads far less each turn (one cited report: 158.8K per turn for the old bot against 35.7K for its clean copy; measure your own with the ledger).
 +
 +Only on the owner's yes, and never delete the old bot in the same week:
 +
 +1. Ask the old bot: "List the rules, facts, decisions and open jobs that must survive a fresh start. Leave out anything already in the repo or the workspace files." Save the answer to `context/reset-<bot>-<date>.md`.
-+2. The owner duplicates the bot (or creates a new one from the same pack) and sends it its master prompt plus that file.
++2. Put the must-keep rules in the bot's description: it always carries over to a duplicate. The owner duplicates the bot (settings, skills and description carry over; chat and memory don't), and the copy reads `context/reset-<bot>-<date>.md` and saves what matters to memory.
 +3. Check: ask both bots three questions about current work; the new one must answer from the file and the workspace.
 +4. Keep the old bot hidden (unpinned) for a week. Delete it only on the owner's separate yes.
 +5. Write the before and after usage readings in `log/usage-ledger.md`.

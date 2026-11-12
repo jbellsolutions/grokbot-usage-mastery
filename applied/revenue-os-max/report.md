@@ -5,18 +5,18 @@
 - Layout: factory-pack
 - Mode: APPLY
 - Edition: owner
-- When: 2026-11-12T13:24:11
+- When: 2026-11-12T13:41:24
 
 ## Plan and result
 
 | Step | What | Status | Detail |
 |---|---|---|---|
-| rules | Usage rules in every bot's memory | upgraded | replace usage rules block in MASTER-PROMPT.md with this version |
+| rules | Usage rules in every bot's memory | present | usage rules already in MASTER-PROMPT.md (this version) |
 | skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
 | handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in HANDOFF.md (this version) |
 | routines | Routine frequency audit (report only) | present | 43 schedules, about 473 runs a week; none more often than every 3 hours |
-| skills-count | Skill count check (report only) | present | 70 skills (under 90) |
-| prompt-weight | Instructions weight (report only) | flag | about 3919 words of standing instructions memory holds (largest: master prompt 866, cold-email 335, sales-crm 300); every turn and run re-reads them; trim duplicates and move reference detail into files |
+| skills-count | Skill count check (report only) | present | 81 skills (under 90) |
+| prompt-weight | Instructions weight (report only) | flag | about 4089 words of standing instructions memory holds (largest: master prompt 866, cold-email 357, content-seo 333); every turn and run re-reads them; trim duplicates and move reference detail into files |
 | present | Usage habits the pack already has | present | already built in: quiet runs end [SILENT], handoffs through files (requests/), guards as scripts, STOP switch, spend gate (never spend without a yes) |
 
 ## Routines by runs per week (most first)
@@ -46,9 +46,9 @@
 - handoff: PASS
 - pack check (tools/check.py): RESULT: PASS
 
-Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-132410`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-134124`
 
-Touched: `MASTER-PROMPT.md`, `usage/`
+Touched: `usage/`
 
 ## Needs the owner's yes (not applied)
 

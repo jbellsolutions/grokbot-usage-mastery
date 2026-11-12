@@ -5,13 +5,13 @@
 - Layout: factory-pack
 - Mode: APPLY
 - Edition: owner
-- When: 2026-11-12T13:24:11
+- When: 2026-11-12T13:41:25
 
 ## Plan and result
 
 | Step | What | Status | Detail |
 |---|---|---|---|
-| rules | Usage rules in every bot's memory | upgraded | replace usage rules block in MASTER-PROMPT.md with this version |
+| rules | Usage rules in every bot's memory | present | usage rules already in MASTER-PROMPT.md (this version) |
 | skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
 | handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in HANDOFF.md (this version) |
 | routines | Routine frequency audit (report only) | flag | 29 schedules, about 882 runs a week; 28 pairs start under 5 minutes apart (Grok needs 5): Morning plan `30 12 * * *` and Read answers `*/30 * * * *`; Evening report `30 23 * * *` and Read answers `*/30 * * * *`; Mine Facebook groups `30 5 * * *` and Read answers `*/30 * * * *`; 5 run more than every 3 hours (see table): candidates for a slower cron or a script doorbell |
@@ -46,9 +46,9 @@
 - handoff: PASS
 - pack check (tools/check.py): RESULT: PASS
 
-Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-132411`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-134124`
 
-Touched: `MASTER-PROMPT.md`, `usage/`
+Touched: `usage/`
 
 ## Needs the owner's yes (not applied)
 

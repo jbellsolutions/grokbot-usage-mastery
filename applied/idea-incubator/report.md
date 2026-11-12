@@ -5,13 +5,13 @@
 - Layout: factory-pack
 - Mode: APPLY
 - Edition: owner
-- When: 2026-11-12T13:24:11
+- When: 2026-11-12T13:41:25
 
 ## Plan and result
 
 | Step | What | Status | Detail |
 |---|---|---|---|
-| rules | Usage rules in every bot's memory | upgraded | replace usage rules block in MASTER-PROMPT.md with this version |
+| rules | Usage rules in every bot's memory | present | usage rules already in MASTER-PROMPT.md (this version) |
 | skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
 | handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in HANDOFF.md (this version) |
 | routines | Routine frequency audit (report only) | present | 17 schedules, about 264 runs a week; none more often than every 3 hours |
@@ -46,9 +46,9 @@
 - handoff: PASS
 - pack check (tools/check.py): RESULT: PASS
 
-Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-132411`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-134125`
 
-Touched: `MASTER-PROMPT.md`, `usage/`
+Touched: `usage/`
 
 ## Needs the owner's yes (not applied)
 
