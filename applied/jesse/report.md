@@ -1,19 +1,19 @@
 # Usage-mastery report: build
 
 - Kit: grokbot-usage-mastery v1.0.0
-- Target: `/Users/home/REPOS/grokbot-factory/.worktrees/smart-contracting/ideas/smart-contracting/build`
+- Target: `<factory>/ideas/smart-contracting/build`
 - Layout: factory-pack
 - Mode: APPLY
 - Edition: client
-- When: 2026-11-12T13:25:27
+- When: 2026-11-12T13:32:20
 
 ## Plan and result
 
 | Step | What | Status | Detail |
 |---|---|---|---|
-| rules | Usage rules in every bot's memory | applied | add usage rules inside the master prompt (saved to memory word for word) |
-| skill | usage-saver skill and scripts | applied | add usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
-| handoff | Install, ledger and weekly audit steps in the handoff | applied | add usage section to HANDOFF.md |
+| rules | Usage rules in every bot's memory | present | usage rules already in MASTER-PROMPT.md (this version) |
+| skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
+| handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in HANDOFF.md (this version) |
 | routines | Routine frequency audit (report only) | present | 12 schedules, about 47 runs a week; none more often than every 3 hours |
 | skills-count | Skill count check (report only) | present | 11 skills (under 90) |
 | prompt-weight | Instructions weight (report only) | flag | about 2753 words of standing instructions memory holds (largest: master prompt 1061, lead 356, dream100 329); every turn and run re-reads them; trim duplicates and move reference detail into files |
@@ -43,9 +43,9 @@
 - handoff: PASS
 - pack check (tools/check.py): RESULT: PASS
 
-Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-132526`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/build-20261112-133220`
 
-Touched: `MASTER-PROMPT.md`, `usage/`, `HANDOFF.md`
+Touched: `usage/`
 
 ## Needs the owner's yes (not applied)
 
