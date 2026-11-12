@@ -1,6 +1,6 @@
-# Tommy (TMEC Services): ready to push
+# Tommy (TMEC Services): pushed and released
 
-**Status, 2026-11-12, round 2.** Everything is built and verified. Nothing is pushed or sent, because `tmec-grokbot` is public and is Tommy's install source.
+**Status, 2026-11-12: pushed and released on Justin's word ("Push and release").** `tmec-grokbot` `main` is at 61a8b2a, and release [v1.0.2](https://github.com/jbellsolutions/tmec-grokbot/releases/tag/v1.0.2) is the latest. A signed-out download of `releases/latest/download/tmec-grokbot.zip` returns 200, and the zip has `usage/` and `policies/USAGE.md` inside. Nothing was sent to Tommy. The local branch below was merged and deleted.
 
 - **Local branch** `usage/kit-v1` in `Client Builds/Tommy/tmec-grokbot`, commit `61a8b2a`, on top of `main` `9f6af7f`. The repo is left on `main`.
 - **Attachable zip:** `Client Builds/Tommy/deliver/tmec-grokbot-usage-v1.zip` (a `git archive` of 61a8b2a, the same form as the release zip).

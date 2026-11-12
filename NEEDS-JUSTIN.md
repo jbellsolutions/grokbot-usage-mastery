@@ -10,7 +10,7 @@ Only Justin can do these. Each item gives the exact click or command and what it
    - Do one of: connect the Claude in Chrome extension (open the Claude side panel in Chrome and sign in with this app's account), or sign in to skool.com once in the app's built-in browser pane.
    - Also close the stray Chrome tab on skool.com/aisystems/classroom that a read attempt opened.
    - Unblocks: the paid group's tricks. They go into the next version as `source_class: paid`, in our own words, and never ship to clients.
-3. [ ] **Review and merge factory PR #5** (https://github.com/jbellsolutions/grokbot-factory/pull/5).
+3. [x] **Review and merge factory PR #5** (done 2026-11-12: merged 9ed5492; v2 releases of all three packs) (https://github.com/jbellsolutions/grokbot-factory/pull/5).
    - It adds the kit to the template and the three packs, and moves the watchdogs to every 3 hours.
    - Then run `bin/pack <slug> --release` for revenue-os-max, find-me-money and idea-incubator. Or tell the usage-mastery chat "merge it" and it will.
    - Unblocks: every future bot gets the kit, and the v2 zips carry it.
@@ -22,7 +22,7 @@ Only Justin can do these. Each item gives the exact click or command and what it
    - Do: grok.com/dashboard/billing → set a monthly additional-usage limit, or turn Auto top-up off.
    - Then paste the three lines under "Auto-review lines to paste" in MASTERY.md into Settings → Auto-review → Custom Rules.
    - Unblocks: no more surprise bills like the seed creator's $550 day.
-6. [ ] **Tommy (client production, public repo):** yes or no to `applied/tommy/README.md`.
+6. [x] **Tommy (client production, public repo):** (done 2026-11-12: tmec-grokbot 61a8b2a, release v1.0.2; his bots get it on install. Still his: the spending cap and the Auto-review lines) yes or no to `applied/tommy/README.md`.
    - Do: `git am` the patch, push `tmec-grokbot`, cut its release.
    - Unblocks: his 11 bots get the kit at install.
 7. [ ] **Jesse and Mike (client production).**
