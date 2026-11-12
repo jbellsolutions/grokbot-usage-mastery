@@ -1,6 +1,6 @@
 # Sources
 
-Every source behind MASTERY.md v1.0.0, newest first, with the tricks it supports. Research notes in our own words: [notes/](notes/).
+Every source behind MASTERY.md v1.1.0, newest first, with the tricks it supports. Research notes in our own words: [notes/](notes/).
 
 | Date | Platform | Source | Tricks |
 |---|---|---|---|
@@ -8,6 +8,7 @@ Every source behind MASTERY.md v1.0.0, newest first, with the tricks it supports
 | 2026-11-12 | github | https://github.com/duckdb/duckdb | 6 |
 | 2026-11-12 | github | https://github.com/dgtlmoon/changedetection.io | 16, 26 |
 | 2026-11-12 | github | https://github.com/rtk-ai/rtk | 32 |
+| 2026-11-12 | github | https://github.com/jbellsolutions/tmec-grokbot/releases/latest | 33 |
 | 2026-11-11 | github | https://github.com/adbar/trafilatura | 6 |
 | 2026-11-10 | youtube | https://www.youtube.com/watch?v=V3ETwJAR5-I | 1, 11, 12, 14, 18, 19, 20 |
 | 2026-11-10 | github | https://github.com/pydantic/pydantic | 15 |

@@ -1001,6 +1001,31 @@
         "why": "",
         "needs": ""
       }
+    },
+    {
+      "id": "optimizer-updates",
+      "rank": 33,
+      "title": "Ship optimizations as small updates, applied by an optimizer",
+      "category": "setup",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://github.com/jbellsolutions/tmec-grokbot/releases/latest",
+          "date": "2026-11-12",
+          "platform": "github"
+        }
+      ],
+      "what": "Don't reinstall a live team to roll out a usage improvement. kit/bin/make_update.py builds a small zip of only the optimization changes since the installed release (usage/, the rules, read-less skill lines). It leaves out anything that touches gates, approvals, schedules or charters and lists those for the owner. On the bot, usage/optimizer/update.py copies only what is new, with a backup, and prints a few chat steps. One pasted line runs it; an optional Optimizer bot checks weekly.",
+      "evidence": "Measured here: built for Tommy's pack and applied to his installed v1.0.1 files. The first run changed 39 files; a second run changed none; the result matched the release byte for byte. A test covers the out-of-scope case.",
+      "evidence_level": "measured-here",
+      "risk": "low: an update can't send, spend, delete or change a gate, and every overwrite is backed up",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "skill",
+        "why": "",
+        "needs": "A public update link for client packs (their repo's release), or a pasted zip"
+      }
     }
   ],
   "rejected": [

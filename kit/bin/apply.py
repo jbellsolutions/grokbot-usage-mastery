@@ -264,7 +264,8 @@ def handoff_section(ctx: Ctx) -> str:
             f"3. Copy `{u}/LEDGER.md` to `log/usage-ledger.md`. Ask {who} for the baseline reading (Settings → Usage: % used and reset date) before the first test day, and again after it.\n"
             f"4. The weekly audit (`{u}/AUDIT.md`) runs inside the Monday evening report; it adds no routine and changes nothing.\n"
             f"5. Check: `bash {u}/scripts/grep_lines.sh 'usage-mastery v' {u}/.. 3` prints at least one line (the rules are in place and the scripts run).\n"
-            f"6. Show {who} the two owner-only steps, once per Grok account, and record the answers in `log/setup.md`:\n"
+            f"6. Optimizer: save `{u}/optimizer/SKILL.md` as a private skill named optimizer, and run `python3 {u}/optimizer/update.py init`. Later updates arrive as one pasted line; the optimizer applies only what changed.\n"
+            f"7. Show {who} the two owner-only steps, once per Grok account, and record the answers in `log/setup.md`:\n"
             f"   - A spending cap: grok.com/dashboard/billing → a monthly additional-usage limit, or Auto top-up off. The bot never changes billing.\n"
             f"   - Three lines for Auto-review → Custom Rules (chat only; routines never wait on approvals):\n\n"
             f"     ```\n"
@@ -489,6 +490,8 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--report", default="")
     ap.add_argument("--backup-dir", default="")
+    ap.add_argument("--workspace", default="", help="the bot's workspace on its computer, e.g. /workspace/tmec-team (multi-bot packs read it from manifest.json)")
+    ap.add_argument("--update-url", default="", help="public URL of this pack's update zip, for the optimizer's weekly check (leave empty for paste-only)")
     ap.add_argument("--restore", default="", help="copy a backup folder from an earlier --apply back over the target, then exit")
     args = ap.parse_args()
     if args.restore:
@@ -514,6 +517,11 @@ def main():
         shutil.rmtree(stage)
     shutil.copytree(SKILL_SRC, stage, ignore=shutil.ignore_patterns("__pycache__"))
     (stage / "VERSION").write_text(VERSION + "\n")
+    ws_abs = args.workspace or (ctx.ws[: -len("/repo")] if ctx.ws.endswith("/repo") and ctx.ws.startswith("/") else "")
+    cfg = {"owner": args.owner, "update_url": args.update_url or None}
+    if ws_abs:
+        cfg.update({"workspace": ws_abs, "repo": ws_abs + "/repo"})
+    (stage / "optimizer" / "config.json").write_text(json.dumps(cfg, indent=1) + "\n")
     ctx.staged_skill, ctx.skill_hash = stage, tree_hash(stage)
     ctx.routine_rows = []
 

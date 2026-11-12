@@ -1,4 +1,4 @@
-# GrokBot usage mastery, v1.0.0
+# GrokBot usage mastery, v1.1.0
 
 The ranked playbook for getting the most out of Grok Bot (xAI) for the least usage. Every trick names its sources, dates, evidence, risk and fit. Generated from [`tricks/tricks.json`](tricks/tricks.json) by `bin/render.py`; edit the JSON, not this page.
 
@@ -33,6 +33,17 @@ Sources split two ways. One bot per kind of job keeps each chat short (the seed 
 - **Fits GrokBot:** yes
 - **Lands as:** already in our packs. Test-day measurement decides whether routines move to their own bot
 - **Sources:** [youtube 2026-11-01](https://youtu.be/DmFupd7dz3w); [youtube 2026-11-10](https://www.youtube.com/watch?v=V3ETwJAR5-I)
+
+<a id="optimizer-updates"></a>
+### 33. Ship optimizations as small updates, applied by an optimizer
+
+Don't reinstall a live team to roll out a usage improvement. kit/bin/make_update.py builds a small zip of only the optimization changes since the installed release (usage/, the rules, read-less skill lines). It leaves out anything that touches gates, approvals, schedules or charters and lists those for the owner. On the bot, usage/optimizer/update.py copies only what is new, with a backup, and prints a few chat steps. One pasted line runs it; an optional Optimizer bot checks weekly.
+
+- **Evidence (measured here):** Measured here: built for Tommy's pack and applied to his installed v1.0.1 files. The first run changed 39 files; a second run changed none; the result matched the release byte for byte. A test covers the out-of-scope case.
+- **Risk:** low: an update can't send, spend, delete or change a gate, and every overwrite is backed up
+- **Fits GrokBot:** yes
+- **Lands as:** kit applies it. A public update link for client packs (their repo's release), or a pasted zip
+- **Sources:** [github 2026-11-12](https://github.com/jbellsolutions/tmec-grokbot/releases/latest)
 
 
 ## Prompts and skills

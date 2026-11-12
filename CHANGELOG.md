@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.0 (2026-11-12)
+
+- **Optimizer.** `usage/optimizer/` (SKILL.md, update.py) ships with the kit to every pack. It applies optimization updates by itself: only what changed, with a backup, plus a few chat steps. It never sends, spends, deletes, or changes a gate, approval, schedule or charter.
+- **`kit/bin/make_update.py`.** Builds a pack's update zip from its git history. Usage changes, docs and new bots go in. Anything else is left out and named for the owner.
+- **`apply.py`.** New `--workspace` and `--update-url` options write the optimizer's config. The handoff gains an optimizer step.
+- **First use: Tommy (TMEC).** `tmec-grokbot-update.zip` on the public latest release, plus an Optimizer bot that is created only on Tommy's yes.
+- **Tests.** 13, including the update path end to end.
+
 ## 1.0.0 (2026-11-12)
 
 First version.

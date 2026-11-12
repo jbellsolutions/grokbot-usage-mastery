@@ -1,11 +1,11 @@
 # Usage-mastery report: tmec-grokbot
 
-- Kit: grokbot-usage-mastery v1.0.0
+- Kit: grokbot-usage-mastery v1.1.0
 - Target: `/Users/home/AI OS Market Share /AIOS/Client Builds/Tommy/tmec-grokbot`
 - Layout: multi-bot-pack
 - Mode: APPLY
 - Edition: client
-- When: 2026-11-12T13:43:38
+- When: 2026-11-12T14:00:52
 
 ## Plan and result
 
@@ -14,7 +14,7 @@
 | rules | Usage rules in every bot's memory | present | policies/USAGE.md and START-HERE lines present (this version) |
 | skill | usage-saver skill and scripts | applied | upgrade usage/ (usage-saver skill: 10 scripts, AUDIT, RESET, LEDGER) |
 | handoff | Install, ledger and weekly audit steps in the handoff | present | usage section in START-HERE.md (this version) |
-| routines | Routine frequency audit (report only) | present | 18 schedules, about 55 runs a week; none more often than every 3 hours |
+| routines | Routine frequency audit (report only) | present | 19 schedules, about 56 runs a week; none more often than every 3 hours |
 | skills-count | Skill count check (report only) | present | 28 skills (under 90) |
 | prompt-weight | Instructions weight (report only) | present | about 318 words of standing instructions memory holds (largest: 06-crm-reactivation 318, 07-content-studio 295, 03-dream-100 293); every turn and run re-reads them |
 | present | Usage habits the pack already has | present | already built in: quiet runs end [SILENT], handoffs through files (requests/), guards as scripts, STOP switch, spend gate (never spend without a yes) |
@@ -33,11 +33,11 @@
 | 5 | `23 7 * * 1-5` | 03-dream-100.md | Schedule / `23 7 * * 1-5` / Dream 100 drafts / Every weekday at 7:23 AM |
 | 5 | `17 6 * * 1-5` | 01-tmec-command.md | Schedule / `17 6 * * 1-5` / Morning brief / Every weekday at 6:17 AM |
 | 1 | `7 8 * * 1` | 07-content-studio.md | Schedule / `7 8 * * 1` / Content week / Every Monday at 8:07 AM |
+| 1 | `7 4 * * 1` | 12-optimizer.md | Schedule / `7 4 * * 1` / Optimizer check / Mondays at 4:07 AM |
 | 1 | `53 7 * * 3` | 06-crm-reactivation.md | Schedule / `53 7 * * 3` / Reactivation batch / Every Wednesday at 7:53 AM |
 | 1 | `43 6 * * 4` | 07-content-studio.md | Schedule / `43 6 * * 4` / Newsletter / Every Thursday at 6:43 AM |
 | 1 | `41 7 * * 2` | 05-trades-outreach.md | Schedule / `41 7 * * 2` / Trades wave prep / Every Tuesday at 7:41 AM |
 | 1 | `41 7 * * 1` | 04-dream-500.md | Schedule / `41 7 * * 1` / Dream 500 wave prep / Every Monday at 7:41 AM |
-| 1 | `3 6 * * 1` | 10-forecast.md | Schedule / `3 6 * * 1` / Monday scoreboard / Mondays at 6:03 AM |
 
 ## Verify
 
@@ -45,7 +45,7 @@
 - skill: PASS
 - handoff: PASS
 
-Backup of every touched file: `/Users/home/.usage-mastery-backups/tmec-grokbot-20261112-134338`
+Backup of every touched file: `/Users/home/.usage-mastery-backups/tmec-grokbot-20261112-140051`
 
 Touched: `usage/`
 

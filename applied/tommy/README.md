@@ -40,3 +40,27 @@ gh release create v1.0.2 ../deliver/tmec-grokbot.zip -R jbellsolutions/tmec-grok
 > Unpack the attached zip over /workspace/tmec-team/repo (keep context/, data/ and log/), then follow the "Usage kit" section of START-HERE.md and the usage-mastery steps: save the rules in policies/USAGE.md to your memory word for word, run the install, start the usage ledger, and have every other bot save the same rules. Show me the plan first and change nothing until I say yes.
 
 If the team isn't installed yet, the normal install from the new release (Route A), or the attached zip, includes all of it.
+
+## Update-only path and Optimizer (1.0.3): built, waiting on the publish yes
+
+Justin, 2026-11-12: "update his GrokBot to have a separate one just to update optimization."
+
+- **Local commit:** `825438d` on `tmec-grokbot` `main`, not pushed. It contains:
+  - `agents/12-optimizer.md` and `routines/optimizer-check.prompt` (Optimizer bot, created only on Tommy's yes; routine paused);
+  - `usage/optimizer/`;
+  - the manifest entry;
+  - `PACK-VERSION` 1.0.3.
+
+  `cb verify`: ok, no errors.
+- **Zips:** `Client Builds/Tommy/deliver/tmec-grokbot-update.zip` (update only, 40 files, nothing left out) and `tmec-grokbot-v1.0.3.zip` (full install).
+- **Simulated on v1.0.1:** the first run changed 39 files (with a backup), the second run changed none, and the installed copy matched the release byte for byte.
+- **Publish** (needs Justin's yes in chat; the auto-mode check blocks a public push relayed from another chat):
+
+```bash
+cd "/Users/home/AI OS Market Share /AIOS/Client Builds/Tommy/tmec-grokbot" && git push origin main
+gh release create v1.0.3 ../deliver/tmec-grokbot-v1.0.3.zip#tmec-grokbot.zip ../deliver/tmec-grokbot-update.zip -R jbellsolutions/tmec-grokbot --title "TMEC Grok Bot team v1.0.3" --notes "Update-only zip plus Optimizer"
+```
+
+- **The line to paste into TMEC Command,** once published:
+
+> Download https://github.com/jbellsolutions/tmec-grokbot/releases/latest/download/tmec-grokbot-update.zip, unzip it into /workspace/tmec-team/updates/1.0.3/ and follow UPDATE.md inside it. This is an optimization-only update from Justin's team: no approvals, sends or schedules change.
