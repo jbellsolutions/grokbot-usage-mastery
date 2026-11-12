@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 APPLY = ROOT / "kit" / "bin" / "apply.py"
-FACTORY = Path(os.environ.get("FACTORY_TEMPLATE", Path.home() / "REPOS/grokbot-factory/template"))
+FACTORY = Path(os.environ.get("FACTORY_TEMPLATE", Path(__file__).resolve().parent / "fixtures" / "template"))  # pre-kit snapshot of the factory template
 
 
 def run(*args):

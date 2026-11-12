@@ -1,0 +1,22 @@
+{
+  "_doc": "Which role uses which skill and which account. tools/check.py reads this. skills: role -> skill folders under skills/<role>/ ('bot-guards' means guards/). accounts: name a role charter uses -> path in the pack that serves it (or null), and key names (SIGNIN for a sign-in Justin does).",
+  "skills": {
+    "lead": [
+      "bot-guards"
+    ]
+  },
+  "accounts": {
+    "Slack": {
+      "path": null,
+      "keys": [
+        "SLACK_BOT_TOKEN"
+      ]
+    },
+    "Notion": {
+      "path": null,
+      "keys": [
+        "NOTION_TOKEN"
+      ]
+    }
+  }
+}

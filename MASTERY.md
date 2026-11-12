@@ -133,7 +133,7 @@ Each message makes the bot re-read the whole chat, files it dragged in included.
 
 Run a small free script on the bot's computer and give the model only its output: trafilatura for the article text of a page, jq or pick.py for the fields of a big JSON reply, ripgrep for matching lines, DuckDB (or sqlite) for a one-line answer from a spreadsheet, pdftotext or pypdf for a PDF. The kit ships all of these as the usage-saver skill, with stdlib fallbacks.
 
-- **Evidence (measured here):** Measured here (characters in vs out): Wikipedia's Costco page 1,242,861 → 103,714 (92% less, trafilatura); GitHub search reply 197,044 → 2,573 (98.7%, pick.py); 86,352-row airports CSV 12.76 MB → an 85-character answer (sheet_q.py, DuckDB and sqlite agree); a 15-page PDF 2.2 MB → 59,599 characters of text (pdf2txt.py); 12,449 characters of code → 772 matching lines (grep_lines.sh). The creator's own tests: 4.5M tokens → 57,900 across seven jobs.
+- **Evidence (measured here):** Measured here (characters in vs out): Wikipedia's Costco page 1,242,861 → 103,714 (92% less, trafilatura); GitHub search reply 197,044 → 2,573 (98.7%, pick.py); 86,352-row airports CSV 12.76 MB → an 85-character answer (sheet_q.py, DuckDB and sqlite agree); a 15-page PDF 2.2 MB → 59,599 characters of text (pdf2txt.py); 12,449 characters of code → 772 matching lines (grep_lines.sh). The creator's own tests: 4.5M tokens → 57,900 across seven jobs. Seed 3's on-screen table (frames checked): 4,343,098 tokens down to 57,944 across seven real jobs.
 - **Risk:** low: open-source, pinned, no keys, nothing leaves the computer
 - **Fits GrokBot:** yes
 - **Lands as:** kit applies it
@@ -153,9 +153,9 @@ Copy the words instead of a screenshot; crop to the part that matters; turn a PD
 <a id="reset-heavy-bot"></a>
 ### 18. Reset a heavy bot from its must-keep memory
 
-Export the rules, facts and open jobs that must survive, duplicate the bot (duplicating keeps settings, skills and routines but not chat or memory), feed the note back, stop the old bot's routines so nothing runs twice, keep the old one hidden a week, delete only on a separate yes. Steps in usage/RESET.md.
+Ask the bot to write everything it remembers (preferences, standing rules) to a file. Put the must-keep rules in the bot's description, which always carries over to a duplicate. Duplicate the bot: the copy keeps settings, skills and description but starts with a clean history. Have the copy read the file and save what matters, then stop the old bot's routines so nothing runs twice. Keep the old bot hidden a week and delete it only on a separate yes. Steps in usage/RESET.md.
 
-- **Evidence (shown in source):** Shown in one video; claimed about 75% less per turn.
+- **Evidence (shown in source):** Shown on the seed's slide, from one cited report: an old bot read 158.8K per turn against 35.7K for its clean duplicate (about 75% less), and one chat grew from 10.1K to 254.6K per turn in 7 turns.
 - **Risk:** med: routines can run twice or context can be lost; owner-approved only
 - **Fits GrokBot:** yes
 - **Lands as:** owner click or paste. Owner's yes per bot, after the weekly audit flags it
@@ -415,9 +415,10 @@ Ask first before re-running a step that has already failed twice.
 | 'Limits halved' or '+25%' claims | User reports only; xAI has published no limit numbers. |
 | Paid prompt packs | The tricks are reproducible from public sources; buying is spend, and paid text can't be shipped to clients. |
 | Terse-output modes as a main saving | Answers were under 1% of tokens in the only export we have; re-reading is the cost. |
+| Marketplace usage-watcher bots (Usage Bot, Limit Saver and similar) | Shown in seed 1 but untested even by the creator. They run their own routines, about 3 a day, which costs usage. Our weekly audit gives the same report-only advice without an extra bot or routine. |
 
 ## Gaps in this version
 
 - The paid Skool group (AI Systems Society) was not read: the signed-in browser wasn't reachable. Its items will be added as `source_class: paid`, kept in our own words, and never shipped to clients.
-- Reddit and X post bodies could not be fetched; claims from them are search snippets and marked as such in `sources/`.
+- Reddit and X post bodies could not be fetched (WebFetch, curl, firecrawl, and the app's built-in browser, which refuses reddit.com). Claims from them are search snippets, marked as such in `sources/`. Reading them needs Justin's Chrome connected (NEEDS-JUSTIN 2).
 - No trick here is measured on a Grok account yet. The ledger (trick 11) is how each one gets proven or dropped.
