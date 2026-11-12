@@ -1,0 +1,1040 @@
+{
+  "_doc": "The source of truth. MASTERY.md is rendered from this by bin/render.py; kit/bin/apply.py reads apply.kind. evidence_level: measured-here (we ran it), official (xAI docs), shown (on screen in a source), claim (said, not shown). apply.kind: auto (the kit applies it), built-in (already in the factory packs), owner (a click or paste only the owner can do; low risk), gated (spend, keys, sign-ins, new accounts, deletes or a rule conflict: the owner decides), info (good to know, nothing to apply). source_class: public, or paid (Skool, never shipped to clients or public repos).",
+  "version": "1.0.0",
+  "tricks": [
+    {
+      "id": "routine-frequency",
+      "rank": 1,
+      "title": "Slow routines down; merge small checks",
+      "category": "scheduling",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://docs.x.ai/grok-bot/faq",
+          "date": "2026-11-12",
+          "platform": "docs"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://forum.cursor.com/t/best-practices-for-using-grok-bot-more-token-efficiently/175188",
+          "date": "2026-10-18",
+          "platform": "forum"
+        },
+        {
+          "url": "https://github.com/sit-in/awesome-grokbot-playbooks/blob/main/examples/routine-budget.md",
+          "date": "2026-10-18",
+          "platform": "github"
+        },
+        {
+          "url": "https://youtu.be/WRqZktcjJl8",
+          "date": "2026-11-09",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Every routine run wakes the bot and re-reads its context. A 15-minute routine is about 96 runs a day; an hourly one is 168 a week. List each routine's runs per week and how often it found anything. Slow the ones that mostly end silent, fold small checks into one daily and one weekly run, and pause (never delete) routines that produced nothing in 7 days. Keep every pair of routines at least 5 minutes apart. Run non-urgent routines only in working hours in the bot's time zone. When the week's usage is nearly gone: pause all but the lead, then re-enable in tiers (KEEP, then SLOW, then EVENT) with a reading between each.",
+      "evidence": "xAI's own guidance (quoted in two videos) is that one hourly routine can use a week of usage in a day. One builder reports 43 of 45 watchdog runs found nothing, and 1,022 weekly wake-ups cut to 219 with no deletions. In our packs the audit found hourly watchdogs in all three and a 30-minute sweep in Find Me Money.",
+      "evidence_level": "official",
+      "risk": "low: fewer runs; slower reaction for anything time-critical, so pick cadence per job",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "routines",
+        "why": "",
+        "needs": "The kit reports; cron changes in a pack go through its PR"
+      }
+    },
+    {
+      "id": "spend-cap",
+      "rank": 2,
+      "title": "Hard cap on extra usage: Auto top-up off or a monthly limit",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://docs.x.ai/grok-bot/faq",
+          "date": "2026-11-12",
+          "platform": "docs"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=6NIQpRr6nkQ",
+          "date": "2026-11-06",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Past the weekly pool, usage bills by token only if on-demand or Auto top-up is on. Leave Auto top-up off, or set a monthly additional-usage limit at grok.com/dashboard/billing. A running task can overshoot the cap a little.",
+      "evidence": "Official FAQ. The seed creator spent about $550 of extra credits in one day without a cap.",
+      "evidence_level": "official",
+      "risk": "low: the bot pauses at the limit instead of billing",
+      "fit": "yes",
+      "apply": {
+        "kind": "owner",
+        "by": "",
+        "why": "An account billing setting only the owner can change",
+        "needs": "Owner: grok.com/dashboard/billing → monthly additional usage limit (or Auto top-up off)"
+      }
+    },
+    {
+      "id": "usage-export",
+      "rank": 3,
+      "title": "Find where usage goes: analyze the usage export",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/WRqZktcjJl8",
+          "date": "2026-11-09",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://docs.x.ai/grok-bot/faq",
+          "date": "2026-11-12",
+          "platform": "docs"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=o5vpYc6DoZ0",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Export the detailed usage CSV from the usage dashboard (on Cursor-linked plans: cursor.com/dashboard → Usage → Export CSV) and break it down by bot and kind. Do it with usage_csv.py on the computer, not by uploading the file into a bot chat, which would itself be read on every later turn. Fix the biggest line first.",
+      "evidence": "Shown: one creator found 58% of usage was routines and 81% was bots re-reading their instructions and memory. Trimming instructions saved about 13% and stopping one hourly routine about 7% (his estimate from the export). Another builder's export showed 93% re-reading. The CSV's columns aren't documented, so usage_csv.py guesses them.",
+      "evidence_level": "shown",
+      "risk": "low: the export may name bots and jobs, so keep it out of public places",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "skill",
+        "why": "",
+        "needs": "Owner downloads the CSV into data/usage/ (the bot can't sign in to the dashboard)"
+      }
+    },
+    {
+      "id": "trim-instructions",
+      "rank": 4,
+      "title": "Trim the instructions every turn re-reads",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/WRqZktcjJl8",
+          "date": "2026-11-09",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://github.com/sit-in/awesome-grokbot-playbooks/blob/main/examples/routine-budget.md",
+          "date": "2026-10-18",
+          "platform": "github"
+        }
+      ],
+      "what": "Master prompt, role sections and saved memory are re-read on every turn and every routine run. Cut duplicated rules and stale facts. Move reference detail into files the bot opens only when a job needs it ('see context/x.md'). Keep the always-on part to rules and pointers. The kit's own rules block is about 150 words for this reason, and apply.py reports each pack's weight.",
+      "evidence": "Shown: about 13% saving in one creator's export analysis. The pointer-to-file pattern is from a community recipe marked unverified by its own author.",
+      "evidence_level": "shown",
+      "risk": "low: a rule moved to a file the bot never opens is a rule lost, so keep the gates in the prompt",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "prompt-weight",
+        "why": "",
+        "needs": "The kit reports weight; trimming a pack's prompt goes through its PR"
+      }
+    },
+    {
+      "id": "fresh-chat",
+      "rank": 5,
+      "title": "One job per chat; restart heavy chats from a handoff note",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=o5vpYc6DoZ0",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Each message makes the bot re-read the whole chat, files it dragged in included. Start a new chat (+) per job; idle chats cost nothing. When a chat is long, have the bot write a short handoff note (role, rules, open jobs, done work) and continue from it in a fresh chat.",
+      "evidence": "One builder's export of about 60 bots and 4.6B tokens in a week: about 93% of tokens were re-reading history and under 1% were answers. A fresh chat started near 16k tokens; old bots read 200k to 380k before acting. The seed creator claims about 75% less per turn after a reset. Single sources, consistent with the docs' description of memory.",
+      "evidence_level": "shown",
+      "risk": "low: a thin note loses context, so check the new chat on current work first",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "read-less-scripts",
+      "rank": 6,
+      "title": "Shrink before the bot reads: clean pages, pick fields, grep lines, query sheets, PDF to text",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/ow6x3pdwydA",
+          "date": "2026-11-06",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://github.com/adbar/trafilatura",
+          "date": "2026-11-11",
+          "platform": "github"
+        },
+        {
+          "url": "https://github.com/jqlang/jq",
+          "date": "2026-11-02",
+          "platform": "github"
+        },
+        {
+          "url": "https://github.com/BurntSushi/ripgrep",
+          "date": "2026-11-09",
+          "platform": "github"
+        },
+        {
+          "url": "https://github.com/duckdb/duckdb",
+          "date": "2026-11-12",
+          "platform": "github"
+        }
+      ],
+      "what": "Run a small free script on the bot's computer and give the model only its output: trafilatura for the article text of a page, jq or pick.py for the fields of a big JSON reply, ripgrep for matching lines, DuckDB (or sqlite) for a one-line answer from a spreadsheet, pdftotext or pypdf for a PDF. The kit ships all of these as the usage-saver skill, with stdlib fallbacks.",
+      "evidence": "Measured here (characters in vs out): Wikipedia's Costco page 1,242,861 → 103,714 (92% less, trafilatura); GitHub search reply 197,044 → 2,573 (98.7%, pick.py); 86,352-row airports CSV 12.76 MB → an 85-character answer (sheet_q.py, DuckDB and sqlite agree); a 15-page PDF 2.2 MB → 59,599 characters of text (pdf2txt.py); 12,449 characters of code → 772 matching lines (grep_lines.sh). The creator's own tests: 4.5M tokens → 57,900 across seven jobs.",
+      "evidence_level": "measured-here",
+      "risk": "low: open-source, pinned, no keys, nothing leaves the computer",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "skill",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "script-the-repeat",
+      "rank": 7,
+      "title": "Turn a repeated job into a script that needs no AI",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/akCTUJhZnZE",
+          "date": "2026-11-05",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Do the job once with the bot, check and fix it, then: 'Turn exactly what you just did into a script that needs no AI. Test it on today's data and show it matches.' Save it as a skill; next time the bot runs the script and replies in two lines, flagging only odd numbers. Never script a job that isn't right yet.",
+      "evidence": "Three independent creators recommend it; claimed up to 11x less usage. Not metered by them. Our factory packs already run their plumbing as scripts (guards, beat.py, job scripts).",
+      "evidence_level": "claim",
+      "risk": "low: a wrong job frozen into a script, so test first",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "connectors-first",
+      "rank": 8,
+      "title": "Connectors and APIs before the browser",
+      "category": "tools-connectors",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://forum.cursor.com/t/best-practices-for-using-grok-bot-more-token-efficiently/175188",
+          "date": "2026-10-18",
+          "platform": "forum"
+        },
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Browser use is screenshot, click, check, repeated, each step metered. Where a Connect app (Gmail, Slack, Calendar, GitHub) or an API exists, use it. Weekly: 'Which jobs used the browser for an app that has a connector?'",
+      "evidence": "Two independent sources plus the seed creator's estimate that a web page visit costs about 70 times a chat turn (his claim, unmeasured).",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "text-not-images",
+      "rank": 9,
+      "title": "Text, not screenshots; crop when you must",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Copy the words instead of a screenshot; crop to the part that matters; turn a PDF into a text file first. Saying 'the blue button top right' beats a full-screen image.",
+      "evidence": "Two creators; the seed creator claims images cost about 20 times text (unmeasured on Grok Bot).",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "batch-fixes",
+      "rank": 10,
+      "title": "Batch fixes into one message",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Brain-dump every change at once (dictation helps), send once, apply in one pass. Standing rule: if fixes arrive one at a time, ask whether there are more before starting. Don't send 'thanks' or 'ok': each is a full re-read.",
+      "evidence": "Two creators; the seed creator claims about 10x less reading. Mechanism matches the docs.",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "brief-once",
+      "rank": 11,
+      "title": "Brief once with a done list",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        }
+      ],
+      "what": "State the goal, why, what to avoid, and 3 to 5 lines that must be true at the end, plus a limit (pages, steps, minutes) and a stop condition. At the end the bot marks each line pass, fail or unknown and fixes only the fails.",
+      "evidence": "Claimed about 5x less per job (seed creator). A vague ask gets a guess, and every 'not like that' re-reads the growing chat.",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "rules",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "usage-audit",
+      "rank": 12,
+      "title": "Weekly usage audit, report only",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=vR5lzCWpp6o",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/UClMrBShiYc",
+          "date": "2026-10-29",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Once a week the bot lists its routines (runs, found-anything rate), browser sessions, screenshots, whole-file reads, repeat jobs, skill count and heavy chats, and proposes the top three changes. It changes nothing. Cross-check with the per-bot breakdown on the usage dashboard. The kit folds it into the Monday evening report, so it adds no routine.",
+      "evidence": "Shown in three videos (one fleet went from 79 bots to about 30; another found a monitor bot using 25%). The bot's own estimate is a guess; the dashboard is the real number.",
+      "evidence_level": "shown",
+      "risk": "low: report only",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "handoff",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "usage-ledger",
+      "rank": 13,
+      "title": "Measure: a usage reading before and after every change",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://docs.x.ai/grok-bot/faq",
+          "date": "2026-11-12",
+          "platform": "docs"
+        }
+      ],
+      "what": "Usage shows under Usage at grok.com/dashboard, with a per-bot breakdown. Write the % used and the reset date into log/usage-ledger.md before a change and a week after. Every saving in this playbook is a source's claim until the ledger shows it.",
+      "evidence": "Official: the dashboard exists. No published limit numbers, and a dashboard bug was reported the week of 2026-11-09, so read it twice.",
+      "evidence_level": "official",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "handoff",
+        "why": "",
+        "needs": "Owner reads the usage screen if the bot can't"
+      }
+    },
+    {
+      "id": "ask-first-expensive",
+      "rank": 14,
+      "title": "Auto-review 'ask first' for expensive actions",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://docs.x.ai/grok-bot/faq",
+          "date": "2026-11-12",
+          "platform": "docs"
+        }
+      ],
+      "what": "Custom rules: ask first before opening more than 5 web pages for one task, starting a sub-agent, or re-running a step that already failed twice. Review the 'allow without asking' list. Approvals raised by routines expire after about 30 minutes, so a routine must never wait on one: our packs draft, queue and stop instead.",
+      "evidence": "Rules UI shown; the docs recommend ask-first rules for risky actions. Saving unmeasured.",
+      "evidence_level": "shown",
+      "risk": "low: a rule too broad can stall chat work",
+      "fit": "yes",
+      "apply": {
+        "kind": "owner",
+        "by": "",
+        "why": "Auto-review rules are pasted by the owner in Settings",
+        "needs": "Owner pastes three lines into Auto-review → Custom Rules (text in MASTERY.md)"
+      }
+    },
+    {
+      "id": "retry-and-shape",
+      "rank": 15,
+      "title": "Retry the call, not the job; check shapes before saving",
+      "category": "reliability",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/ow6x3pdwydA",
+          "date": "2026-11-06",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://github.com/jd/tenacity",
+          "date": "2026-11-01",
+          "platform": "github"
+        },
+        {
+          "url": "https://github.com/pydantic/pydantic",
+          "date": "2026-11-10",
+          "platform": "github"
+        }
+      ],
+      "what": "Wrap flaky calls in retry.py (or tenacity in Python) so a failed download doesn't restart the job; run check_shape.py (or pydantic) on results before they go into a sheet or CRM, and fix only the bad fields.",
+      "evidence": "Shown in the seed video (three tries in 2.2 s; two bad fields caught). Our scripts are tested here.",
+      "evidence_level": "measured-here",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "skill",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "watch-dont-poll",
+      "rank": 16,
+      "title": "Watch pages for changes instead of re-reading them",
+      "category": "scheduling",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/ow6x3pdwydA",
+          "date": "2026-11-06",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://github.com/dgtlmoon/changedetection.io",
+          "date": "2026-11-12",
+          "platform": "github"
+        },
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "page_diff.py keeps a snapshot and prints only what changed, or nothing, so the run ends [SILENT] after reading a few lines. The routine still wakes the bot; to stop the wake-ups too, the check must run outside the bot (changedetection.io or a Cloudflare Worker) and call the bot only on a change, which needs a webhook into Grok Bot (seen live, not documented) and an account (see the gated list).",
+      "evidence": "Seed creator: 43% fewer tokens re-reading a changed page; the outside-the-bot version is arithmetic (720 runs to about 2), not shown.",
+      "evidence_level": "shown",
+      "risk": "low for page_diff.py",
+      "fit": "yes",
+      "apply": {
+        "kind": "auto",
+        "by": "skill",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "short-replies",
+      "rank": 17,
+      "title": "Short replies and silent quiet runs",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "No preamble, no recap, no thanks; a quiet routine run ends with exactly [SILENT]. Small win: answers are under 1% of tokens in the one export we have, so the gain is in not growing the chat that later turns re-read.",
+      "evidence": "Claim; the factory packs already do [SILENT].",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "built-in",
+        "by": "present",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "reset-heavy-bot",
+      "rank": 18,
+      "title": "Reset a heavy bot from its must-keep memory",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Export the rules, facts and open jobs that must survive, duplicate the bot (duplicating keeps settings, skills and routines but not chat or memory), feed the note back, stop the old bot's routines so nothing runs twice, keep the old one hidden a week, delete only on a separate yes. Steps in usage/RESET.md.",
+      "evidence": "Shown in one video; claimed about 75% less per turn.",
+      "evidence_level": "shown",
+      "risk": "med: routines can run twice or context can be lost; owner-approved only",
+      "fit": "yes",
+      "apply": {
+        "kind": "owner",
+        "by": "",
+        "why": "Duplicating and deleting bots is the owner's call",
+        "needs": "Owner's yes per bot, after the weekly audit flags it"
+      }
+    },
+    {
+      "id": "prune-plugins-roster",
+      "rank": 19,
+      "title": "Prune unused plugins, skills and bots",
+      "category": "tools-connectors",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V7dsUn8xh6Y",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/UClMrBShiYc",
+          "date": "2026-10-29",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/Zz3Ixk2Tzpo",
+          "date": "2026-11-04",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Uninstall plugins that error or go unused; a front-door bot that checks the roster each turn pays for every extra bot. The seed creator keeps each account under about 90 skills. Hide rather than delete; deleting a bot removes its chat and routines.",
+      "evidence": "Shown being done; savings are the creators' reasoning, unmeasured. The 90-skill figure is one creator's rule of thumb.",
+      "evidence_level": "shown",
+      "risk": "med for deletes: owner-approved only",
+      "fit": "yes",
+      "apply": {
+        "kind": "owner",
+        "by": "",
+        "why": "Removing plugins, skills or bots is the owner's call",
+        "needs": "Owner acts on the weekly audit's list"
+      }
+    },
+    {
+      "id": "few-bots-few-roles",
+      "rank": 20,
+      "title": "Few bots, few roles, handoffs through files",
+      "category": "setup",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=V3ETwJAR5-I",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Sources split two ways. One bot per kind of job keeps each chat short (the seed creator claims 4x less re-reading). A separate bot for routines keeps scheduled runs out of the chat you use all day: every scheduled run lands in its bot's chat (an X article, relayed in a video). Our factory rule is one bot with a few roles, routines that open with 'Role: X', and handoffs through requests/ files. Justin chose it ('keep it the simplified version'). The open question is whether each routine run re-reads the bot's whole chat. If it does, a one-bot pack with 45 routines grows one long chat fast. Measure it on the test day: compare the usage of the same quiet run on day 1 and day 7. Until then: chat with the bot in fresh chats, not the routines' chat; let the weekly audit flag a heavy chat; reset from a handoff note (trick 16). Split routines into a second bot only if the measurement says so.",
+      "evidence": "Claims on both sides; nothing measured on Grok Bot. Our rule comes from the Hermes-to-Grok comparison and Justin's choice.",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "built-in",
+        "by": "present",
+        "why": "",
+        "needs": "Test-day measurement decides whether routines move to their own bot"
+      }
+    },
+    {
+      "id": "pre-quote-paid-jobs",
+      "rank": 21,
+      "title": "Quote the cost before any paid job",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/jy1Tvd76f70",
+          "date": "2026-11-10",
+          "platform": "youtube"
+        }
+      ],
+      "what": "A bot that spends credits elsewhere (image/video tools, scrapers) quotes the cost, asks, and logs cost per job. Our packs go further: never spend; draft the plan with its cost into the owner's queue.",
+      "evidence": "Shown; self-reported job costs of about $3 to $20.",
+      "evidence_level": "shown",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "built-in",
+        "by": "present",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "decisions-page",
+      "rank": 22,
+      "title": "A decisions page so bots don't idle waiting",
+      "category": "reliability",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/UClMrBShiYc",
+          "date": "2026-10-29",
+          "platform": "youtube"
+        }
+      ],
+      "what": "One shared Page that shows only what waits on the owner, with approve and done buttons. Bots otherwise sit for days waiting for a click. Our packs use requests/<owner>/ and the morning brief for the same job.",
+      "evidence": "Shown live.",
+      "evidence_level": "shown",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "info",
+        "by": "",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "brainstorm-in-chat",
+      "rank": 23,
+      "title": "Think in plain Grok chat; run jobs in the bot",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://forum.cursor.com/t/best-practices-for-using-grok-bot-more-token-efficiently/175188",
+          "date": "2026-10-18",
+          "platform": "forum"
+        }
+      ],
+      "what": "Open-ended discussion goes in regular Grok chat; the bot gets a clear brief. Both draw on one pool on the X subscription, so the gain is a shorter bot chat, not a separate allowance.",
+      "evidence": "One forum user's experiment, unmeasured.",
+      "evidence_level": "claim",
+      "risk": "low",
+      "fit": "partial",
+      "apply": {
+        "kind": "info",
+        "by": "",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "teach-a-task",
+      "rank": 24,
+      "title": "Teach a task: record it once, get a skill",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/akCTUJhZnZE",
+          "date": "2026-11-05",
+          "platform": "youtube"
+        }
+      ],
+      "what": "'Teach a task' (bottom left) records you doing a job on the bot's computer and turns it into an SOP and skill. Then script it (trick 5). Never type a password while recording.",
+      "evidence": "Flow shown; the resulting skill not shown.",
+      "evidence_level": "shown",
+      "risk": "low",
+      "fit": "yes",
+      "apply": {
+        "kind": "info",
+        "by": "",
+        "why": "",
+        "needs": ""
+      }
+    },
+    {
+      "id": "gemini-intern",
+      "rank": 25,
+      "title": "Free 'intern': let a free model read long media first",
+      "category": "tools-connectors",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Store a Google Gemini free-tier key as a secret; long PDFs, videos and audio go to Gemini for a summary, and the bot reads only the summary.",
+      "evidence": "Claimed 96% less reading; not shown measured.",
+      "evidence_level": "claim",
+      "risk": "med: free tiers may use inputs for training, so public material only, never client, contact or deal data",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Needs a new key and sends content to a third party",
+        "needs": "A Gemini API key from the owner, and a rule limiting it to public material"
+      }
+    },
+    {
+      "id": "outside-doorbell",
+      "rank": 26,
+      "title": "Outside 'doorbell' for page watching (Cloudflare Worker or changedetection.io)",
+      "category": "scheduling",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=o5vpYc6DoZ0",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://github.com/dgtlmoon/changedetection.io",
+          "date": "2026-11-12",
+          "platform": "github"
+        }
+      ],
+      "what": "A free worker checks the page on its own schedule and wakes the bot only when it changes, so the routine disappears.",
+      "evidence": "Arithmetic only (720 runs a month to about 2); never shown working end to end.",
+      "evidence_level": "claim",
+      "risk": "med: a new account, and a webhook into Grok Bot that is seen live but not documented",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Needs a Cloudflare (or server) account and the webhook path confirmed",
+        "needs": "Owner's Cloudflare sign-in, and one test that a routine webhook wakes the bot"
+      }
+    },
+    {
+      "id": "apify-actors",
+      "rank": 27,
+      "title": "Ready-made scrapers (Apify actors) instead of bot browsing",
+      "category": "tools-connectors",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/DmFupd7dz3w",
+          "date": "2026-11-01",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Connect Apify in Connect apps and let an actor do bulk scraping; the bot only configures it and reads the result.",
+      "evidence": "Shown connecting; savings claimed.",
+      "evidence_level": "shown",
+      "risk": "med: paid per run, and lead scraping sits close to the no-paid-enrichment rule",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Paid per run; spend needs a yes, and lead data must not be bought enrichment",
+        "needs": "Owner's yes per use, with a capped cost"
+      }
+    },
+    {
+      "id": "second-plan",
+      "rank": 28,
+      "title": "A second plan seat with a synced 'fleet brain'",
+      "category": "cost-usage",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/Zz3Ixk2Tzpo",
+          "date": "2026-11-04",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Buy a second seat on a Team plan, share bots to the team, and sync skills, memory and context both ways through a private GitHub repo (push before switching, pull after). Team-shared bots can't reach the original account's vault.",
+      "evidence": "Shown end to end with a phrase test.",
+      "evidence_level": "shown",
+      "risk": "high: new spend; may breach the terms if used to dodge limits; breaks 'one account per business'; private context in GitHub",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Spend, a terms question, and a conflict with one-account-per-business",
+        "needs": "Owner's decision after the ledger shows the first account still runs out with every other trick applied"
+      }
+    },
+    {
+      "id": "coding-cli-on-box",
+      "rank": 29,
+      "title": "Hand heavy coding to a coding CLI on the bot's computer",
+      "category": "tools-connectors",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/watch?v=V7dsUn8xh6Y",
+          "date": "2026-11-03",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/akCTUJhZnZE",
+          "date": "2026-11-05",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Install Claude Code or Codex on the bot's computer and route coding to it, moving that spend to a separate plan. Or keep coding on a Mac with Claude Code and share a private repo with the bot.",
+      "evidence": "Install shown; savings claimed.",
+      "evidence_level": "shown",
+      "risk": "med/high: one cloud computer is shared by every bot and is not a security boundary, so the token is visible to all of them",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Puts a subscription token on a shared computer",
+        "needs": "Owner's yes, with the token entered only through the secure secret path"
+      }
+    },
+    {
+      "id": "route-traffic",
+      "rank": 30,
+      "title": "'Route traffic through this computer' for sites that block the bot",
+      "category": "reliability",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/akCTUJhZnZE",
+          "date": "2026-11-05",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Settings → Computer → Route traffic through this computer, so the bot browses from your own connection.",
+      "evidence": "Claim; not shown.",
+      "evidence_level": "claim",
+      "risk": "med: your own IP takes any ban; close to getting around a block, which our gates forbid",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Exposes the owner's IP; near the never-get-around-a-block gate",
+        "needs": "Owner's yes per site"
+      }
+    },
+    {
+      "id": "import-claude-setup",
+      "rank": 31,
+      "title": "Import Claude skills and memory",
+      "category": "prompts-skills",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://youtu.be/akCTUJhZnZE",
+          "date": "2026-11-05",
+          "platform": "youtube"
+        },
+        {
+          "url": "https://youtu.be/48LXEHEUiCA",
+          "date": "2026-11-02",
+          "platform": "youtube"
+        }
+      ],
+      "what": "Settings → Import memory, or a prompt that finds Claude skill folders and CLAUDE.md files on the computer and saves them as skills and memory.",
+      "evidence": "Shown running.",
+      "evidence_level": "shown",
+      "risk": "med: CLAUDE.md files can carry private details into the bot's memory; more skills means more to load",
+      "fit": "partial",
+      "apply": {
+        "kind": "gated",
+        "by": "",
+        "why": "Can copy private details into memory",
+        "needs": "Owner reviews what would be imported first"
+      }
+    },
+    {
+      "id": "rtk",
+      "rank": 32,
+      "title": "rtk for long developer command output",
+      "category": "memory-context",
+      "source_class": "public",
+      "sources": [
+        {
+          "url": "https://github.com/rtk-ai/rtk",
+          "date": "2026-11-12",
+          "platform": "github"
+        },
+        {
+          "url": "https://youtu.be/ow6x3pdwydA",
+          "date": "2026-11-06",
+          "platform": "youtube"
+        }
+      ],
+      "what": "A proxy that shortens git, test and build output. The kit's shorten.py covers the general case without an install; rtk is worth it only on a bot that codes.",
+      "evidence": "The creator's test: 56% fewer tokens.",
+      "evidence_level": "shown",
+      "risk": "low",
+      "fit": "partial",
+      "apply": {
+        "kind": "info",
+        "by": "",
+        "why": "",
+        "needs": ""
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "title": "Stacking free trials or sharing one subscription between people",
+      "why": "Terms risk; the trial is a single-use credit."
+    },
+    {
+      "title": "Turning on Auto top-up or on-demand as the fix",
+      "why": "No default cap; only acceptable with a hard monthly limit."
+    },
+    {
+      "title": "Linking a second plan expecting the allowances to add",
+      "why": "The FAQ says Grok Bot uses whichever plan grants more; links are permanent."
+    },
+    {
+      "title": "Duplicating a bot to reset it without a handoff note",
+      "why": "Duplicates keep settings, skills and routines but not chat or memory (FAQ)."
+    },
+    {
+      "title": "Third-party usage meters (grok-bot-usage, QuotAI)",
+      "why": "Zero-star, new, unaudited; one signs into your account, the other asks for Keychain 'Always Allow'. The official dashboard already shows per-bot usage."
+    },
+    {
+      "title": "'Limits halved' or '+25%' claims",
+      "why": "User reports only; xAI has published no limit numbers."
+    },
+    {
+      "title": "Paid prompt packs",
+      "why": "The tricks are reproducible from public sources; buying is spend, and paid text can't be shipped to clients."
+    },
+    {
+      "title": "Terse-output modes as a main saving",
+      "why": "Answers were under 1% of tokens in the only export we have; re-reading is the cost."
+    }
+  ]
+}

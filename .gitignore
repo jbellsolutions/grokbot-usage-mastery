@@ -1,0 +1,6 @@
+refresh/captions/
+__pycache__/
+*.pyc
+dist/
+reports/
+.usage-mastery-backup/

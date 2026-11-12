@@ -1,0 +1,21 @@
+{
+  "_doc": "What the weekly scan watches. Add a channel when a new creator shows up twice with usable tricks. All free: yt-dlp, gh, plain HTTP.",
+  "youtube_channels": [
+    {"name": "Jordan Rafealov (seed creator)", "id": "UCRgHu-iHp517vClgDe1IU0w"},
+    {"name": "AI Automation Station", "id": "UC8_eYAfJcUgI5BV3hg9U2cw"},
+    {"name": "Sharbel A.", "id": "UCxLzvFAUbpdNUIh0hGsEH0w"},
+    {"name": "Julian Goldie SEO", "id": "UCGpsgNbzdF7BECCVbB1COHw"},
+    {"name": "Alex Finn", "id": "UCfQNB91qRP_5ILeu_S_bSkg"},
+    {"name": "By Joel Blackman", "id": "UCaXVwez65knVWncAPSBaJgA"},
+    {"name": "Brock Mesarich", "id": "UCjc1vfduI7BhVMXBLJLDjmA"}
+  ],
+  "youtube_searches": ["grok bot usage", "grok bot credits", "grok bot routines", "grok bot tips", "grok bot skills", "grok bot limits"],
+  "title_must_match": "grok ?bot|grokbot",
+  "github_searches": ["grok bot", "grokbot", "grok-bot usage"],
+  "docs_pages": ["https://docs.x.ai/grok-bot/faq", "https://x.ai/bot"],
+  "manual": [
+    {"what": "Skool: AI Systems Society (paid; Justin's signed-in Chrome only; read only; our own words; source_class paid)", "url": "https://www.skool.com/aisystems"},
+    {"what": "Reddit r/GrokBot new and top of the week (blocked to plain fetch; use the signed-in browser if available)", "url": "https://www.reddit.com/r/GrokBot/top/?t=week"},
+    {"what": "X search 'grok bot usage' latest (browser only)", "url": "https://x.com/search?q=%22grok%20bot%22%20usage&f=live"}
+  ]
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Build the kit zips. Owner edition: everything a bot needs plus sources. Client edition: no paid-sourced
+# tricks, no research notes, no refresh machinery. Optional --release attaches both to a GitHub release
+# on this PRIVATE repo (a bot can't download from it; Justin downloads and attaches the zip).
+#   bin/pack [--release]
+set -euo pipefail
+cd "$(dirname "$0")/.."
+V=$(cat VERSION)
+python3 -I bin/render.py --check
+python3 -m unittest discover tests >/dev/null 2>&1 || { echo "pack: tests fail; not packing"; exit 1; }
+rm -rf dist && mkdir -p dist/stage
+for ed in owner client; do
+  S="dist/stage/grokbot-usage-mastery"
+  rm -rf "$S" && mkdir -p "$S"
+  cp -R APPLY.md MASTERY.md README.md VERSION CHANGELOG.md kit tricks "$S"/
+  if [ "$ed" = owner ]; then cp -R sources "$S"/; else
+    python3 -I - "$S" <<'EOF'
+import json, sys, pathlib
+p = pathlib.Path(sys.argv[1]) / "tricks" / "tricks.json"
+d = json.loads(p.read_text())
+d["tricks"] = [t for t in d["tricks"] if t.get("source_class") != "paid"]
+p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+EOF
+    python3 -I bin/render.py --root "$S" >/dev/null
+  fi
+  find "$S" -name __pycache__ -prune -exec rm -rf {} +
+  (cd dist/stage && zip -qr "../grokbot-usage-mastery-v$V-$ed.zip" grokbot-usage-mastery)
+done
+rm -rf dist/stage
+ls -la dist
+if [ "${1:-}" = "--release" ]; then
+  gh release create "v$V" dist/*.zip --repo jbellsolutions/grokbot-usage-mastery --title "v$V" --notes "See CHANGELOG.md. owner = full kit; client = no paid-sourced tricks or research notes." 2>/dev/null \
+    || gh release upload "v$V" dist/*.zip --repo jbellsolutions/grokbot-usage-mastery --clobber
+fi

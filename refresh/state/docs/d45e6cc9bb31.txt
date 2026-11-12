@@ -1,0 +1,39 @@
+AI teammates that finish the work | Grok Bot
+Grok Bot is out of beta. Read the launch post
+AI teammates you can give real work to. Bots sign in to your tools, work with your entire team, and come back with finished work.
+Bots work right in Slack like any teammate. Ask them questions, hand them work, or loop them into a thread.
+They take projects from start to end, learn how your team works, and check in when your approval is needed.
+Give each Bot its own job, and add another when the work grows. They work in parallel, hand off to each other, and keep going 24/7.
+Bots notice what needs doing and get started before anyone asks.
+Morning! Four of your accounts renew next month, so I pulled their usage, ran health checks, and drafted proposals.
+Sign a Bot in once, and it uses your apps and websites just like you would, even the hard-to-navigate ones.
+Sign in to Zendesk so I can work the support queue.
+Show your Bot a workflow once. It remembers the steps and does them on its own after that.
+Weekly Reporting is watching and learningTeach a task0:00
+Add a Bot to your Google Meet or Zoom call. It listens in, jumps into the chat when it can help, and follows through after.
+People and Bots work together in Slack. Bots bring in other Bots when they need help, and your team sees every step.
+Three new invoices came in. @AP Bot, can you check them against the POs?
+On it. Two match. Flagging the third for @alex.
+Thanks, I’ll take a look.
+Bots keep context from conversations, learn how your team works, and suggest ways to improve themselves.
+FYI, Acme only signs annual.
+Default Acme renewals to annual?UpdateNot now
+Generate pipeline overnight. Researches accounts, scores contacts with intent, drafts email and LinkedIn in your voice, and leaves a review list for you to approve.
+Generate pipeline overnight. Researches accounts, scores contacts with intent, drafts email and LinkedIn in your voice, and leaves a review list for you to approve.
+Works where you work: desktop, iOS, Slack, Teams and more
+Everything in Premium, plus:
+Everything in Super, plus:
+Already on an eligible Premium, Super, Ultra, Teams, or Enterprise plan? Grok Bot is included.Sign in with your plan
+One team, wherever you are — on your desk and in your pocket.
+How PMs, designers, and GTM run Grok Bot day to day.
+Six marketing bots that research competitors, draft positioning in Google Docs, build Google Ads shells, and open PRs on the marketing site.
+Connect Linear and Grok Bot to investigate product problems, plan work, and coordinate coding agents. Every decision keeps its reasoning attached.
+How to sell as a founder with Grok Bot: ICP research, design-partner outreach, call prep, a first-customer playbook, and a pipeline forecast.
+Most AI assistants are built for one person. Grok Bot is an AI teammate the whole team works with. Bots have their own computer, so they work inside your apps and tools, and they run in parallel, 24/7, even when your laptop is closed.
+Yes. Share a Bot with your team, and anyone can ask it questions, hand it work, or loop it into a thread.
+Wherever your team already works. Message Bots in the Grok Bot app on desktop and iOS, bring them into Slack and Microsoft Teams, or add them to your Google Meet, Zoom, or Teams calls.
+Yes. Add a Bot to a Google Meet, Zoom, or Teams call. It listens in, jumps into the chat when it can help, and follows through after.
+Grok Bot subscriptions come with weekly usage included, with additional usage billed based on token cost. Enterprise customers should contact sales.
+Yes. Grok Bot is generally available for Enterprise, as well as for teams on the Teams plan. Contact sales to set up Enterprise access for your organization, including people who don’t already have a seat.
+Grok Bot uses the same Cursor SSO, auth, and privacy mode you already trust. Your cloud computer is encrypted in transit and at rest, with training opt-out. Sensitive actions can go through Auto Review before they run. Enterprise admins can set DLP, certs, proxies, and network controls at boot.
+An AI teammate you can trust to get work done

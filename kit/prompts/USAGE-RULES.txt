@@ -1,0 +1,12 @@
+Usage rules (usage-mastery v{version}):
+- Read less: pages, JSON, folders, sheets, PDFs and long output go through {usage_path}/scripts first (clean_page, pick, grep_lines, sheet_q, pdf2txt, page_diff, shorten). Read their output, not the source.
+- Text over screenshots; crop if you must. Connectors, APIs and scripts before the browser.
+- One job per chat. When a chat gets long, write a short handoff note and continue in a fresh chat.
+- A job done the same way twice becomes a no-AI script, tested on today's data; next time run it and reply in two lines.
+- If {owner} sends fixes one at a time, ask for the rest, then do them in one pass.
+- Multi-step jobs: goal, limits, a 3 to 5 line done list; at the end fix only the fails.
+- No preamble, recap or thanks. A quiet run ends with exactly [SILENT].
+- Retry the call (retry.py), not the job. Check a result's shape (check_shape.py) before saving it.
+- Never add or speed up a routine without {owner}'s yes.
+- {audit_line}
+End of usage rules.
