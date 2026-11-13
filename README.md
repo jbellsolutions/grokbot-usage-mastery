@@ -1,6 +1,6 @@
 # GrokBot usage mastery
 
-Private. Never public. The ranked playbook and a kit that applies itself, so every GrokBot we build or hand to a client uses as little of its weekly allowance as the job allows.
+Public (Justin, 2026-11-12: "make public"). The ranked playbook and a kit that applies itself, so every GrokBot we build or hand to a client uses as little of its weekly allowance as the job allows.
 
 | Path | What |
 |---|---|
@@ -14,6 +14,8 @@ Private. Never public. The ranked playbook and a kit that applies itself, so eve
 | `kit/bin/make_update.py` | Builds an optimization-only update zip for an installed pack (only what changed since its release); the bot's `usage/optimizer/update.py` applies it |
 | `bin/pack` | Builds `dist/grokbot-usage-mastery-v<ver>-{owner,client}.zip`; `--release` attaches them to a release here |
 | [NEEDS-JUSTIN.md](NEEDS-JUSTIN.md) | What only Justin can do |
+
+This repo is public. Paid-community material (Skool and similar) never goes in it, not even in our own words: those notes stay in Justin's private files. No keys, client contact details or private figures either.
 
 ## Use it
 

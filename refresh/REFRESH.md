@@ -1,6 +1,6 @@
 # The weekly refresh
 
-A scheduled Claude Code task on Justin's Mac runs this every Monday. It needs nothing from Justin and spends nothing. It ends with a PR on this private repo, or with "no change".
+A scheduled Claude Code task on Justin's Mac runs this every Monday. It needs nothing from Justin and spends nothing. It ends with a PR on this public repo, or with "no change".
 
 Why local and not a GitHub Action: YouTube rate-limits datacenter IPs (we hit 429s even from home), Skool and X need the signed-in browser, and search APIs would mean keys and spend.
 
@@ -14,7 +14,7 @@ Why local and not a GitHub Action: YouTube rate-limits datacenter IPs (we hit 42
    - Keep only tricks that are safe and shown to work. New claims enter as `evidence_level: claim`.
    - Every trick needs at least one source with its date, plus risk, fit and `apply.kind`.
    - Anything that spends, needs a key, a sign-in or a new account, deletes, or raises a terms question is `gated`.
-   - Skool content: `source_class: paid`, summarized, never quoted.
+   - Skool and other paid content: never added to this repo (it is public). Note it only in Justin's private files.
    - A docs change that contradicts a trick: fix the trick and say so in the changelog.
    - Re-rank only with a reason.
    - Add dropped ideas to `rejected`.

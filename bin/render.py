@@ -61,7 +61,7 @@ def main():
           "## Rejected", "", "| Idea | Why not |", "|---|---|"]
     L += [f"| {r['title']} | {r['why']} |" for r in data["rejected"]]
     L += ["", "## Gaps in this version", "",
-          "- The paid Skool group (AI Systems Society) was not read: the signed-in browser wasn't reachable. Its items will be added as `source_class: paid`, kept in our own words, and never shipped to clients.",
+          "- The paid Skool group (AI Systems Society) was not read: the signed-in browser wasn't reachable. Its items stay out of this public repo and are never shipped to clients.",
           "- Reddit and X post bodies could not be fetched (WebFetch, curl, firecrawl, and the app's built-in browser, which refuses reddit.com). Claims from them are search snippets, marked as such in `sources/`. Reading them needs Justin's Chrome connected (NEEDS-JUSTIN 2).",
           "- No trick here is measured on a Grok account yet. The ledger (trick 11) is how each one gets proven or dropped.", ""]
     mastery = "\n".join(L)
